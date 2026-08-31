@@ -16,6 +16,9 @@ import { sendSuccess } from '../utils/response.js'
  * 4. API routes - Handle all /api/* requests
  * 5. notFoundMiddleware - Catch unmatched routes with JSON 404
  * 6. errorHandlerMiddleware - Centralized error handling (must be last)
+ *
+ * TODO: Authentication and authorization boundaries must be approved before implementation.
+ * TODO: AI safety boundary must remain enforced in all future AI routes and services.
  */
 const app = express()
 

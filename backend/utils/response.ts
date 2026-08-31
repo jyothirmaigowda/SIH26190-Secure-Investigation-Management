@@ -1,4 +1,5 @@
 import { Response } from 'express'
+import type { ApiErrorPayload, ApiErrorResponse, ApiSuccessResponse } from '../types/api.js'
 
 /**
  * Standardized success response format for the SIMS API.
@@ -13,10 +14,12 @@ export function sendSuccess<T>(
   data: T,
   statusCode: number = 200
 ): Response {
-  return res.status(statusCode).json({
+  const payload: ApiSuccessResponse<T> = {
     success: true,
     data,
-  })
+  }
+
+  return res.status(statusCode).json(payload)
 }
 
 /**
@@ -39,17 +42,13 @@ export function sendError(
   isDevelopment: boolean = false,
   stack?: string
 ): Response {
-  const errorObject: Record<string, unknown> = {
+  const errorObject: ApiErrorPayload = {
     message,
     ...(requestId && { requestId }),
+    ...(isDevelopment && stack ? { stack } : {}),
   }
 
-  // Only include stack traces in development
-  if (isDevelopment && stack) {
-    errorObject.stack = stack
-  }
-
-  const response = {
+  const response: ApiErrorResponse = {
     success: false,
     error: errorObject,
   }

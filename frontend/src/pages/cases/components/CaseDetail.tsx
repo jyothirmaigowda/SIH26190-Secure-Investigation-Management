@@ -35,11 +35,11 @@ export function CaseDetail({ case: caseItem, onClose }: CaseDetailProps): JSX.El
           <p className="text-sm text-slate-400 mt-1">{caseItem.caseNumber}</p>
         </div>
         <button
+          type="button"
           onClick={onClose}
-          className="text-slate-400 hover:text-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-600 rounded px-2 py-1"
-          aria-label="Close case details"
+          className="rounded border border-slate-600 px-3 py-1.5 text-xs font-medium text-slate-300 hover:bg-slate-700 hover:text-slate-100 focus:outline-none focus:ring-2 focus:ring-sky-600"
         >
-          X
+          Back to list
         </button>
       </div>
 

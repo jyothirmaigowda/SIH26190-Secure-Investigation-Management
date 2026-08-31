@@ -137,6 +137,14 @@ export function CaseManagementPage(): JSX.Element {
         }
 
         setCases((prevCases) => [newCase, ...prevCases])
+        setFilters({
+          searchQuery: '',
+          status: 'All',
+          priority: 'All',
+          caseType: 'All',
+          policeStation: '',
+        })
+        setSelectedCaseId(newId)
         setSuccessMessage(`Case ${formData.caseNumber} created successfully.`)
       } else if (formMode === 'edit' && selectedCaseId) {
         // Update existing case
@@ -230,6 +238,8 @@ export function CaseManagementPage(): JSX.Element {
                 {/* Case List */}
                 <CaseList
                   cases={filteredCases}
+                  totalCases={cases.length}
+                  selectedCaseId={selectedCaseId}
                   isLoading={isLoading}
                   hasError={hasError}
                   onSelectCase={handleCaseSelect}

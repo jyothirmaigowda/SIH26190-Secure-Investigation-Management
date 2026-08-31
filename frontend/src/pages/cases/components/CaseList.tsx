@@ -10,12 +10,21 @@ import { CaseStateMessage } from './CaseStateMessage'
 
 interface CaseListProps {
   cases: Case[]
+  totalCases: number
+  selectedCaseId: string | null
   isLoading: boolean
   hasError: boolean
   onSelectCase: (caseId: string) => void
 }
 
-export function CaseList({ cases, isLoading, hasError, onSelectCase }: CaseListProps): JSX.Element {
+export function CaseList({
+  cases,
+  totalCases,
+  selectedCaseId,
+  isLoading,
+  hasError,
+  onSelectCase,
+}: CaseListProps): JSX.Element {
   if (isLoading) {
     return <CaseStateMessage type="loading" />
   }
@@ -25,7 +34,12 @@ export function CaseList({ cases, isLoading, hasError, onSelectCase }: CaseListP
   }
 
   if (cases.length === 0) {
-    return <CaseStateMessage type="empty" />
+    return (
+      <CaseStateMessage
+        type="empty"
+        message="No cases match the current search or filters. Clear filters to review all cases."
+      />
+    )
   }
 
   return (
@@ -42,17 +56,23 @@ export function CaseList({ cases, isLoading, hasError, onSelectCase }: CaseListP
               <th className="px-4 py-3 font-semibold text-slate-200">Priority</th>
               <th className="px-4 py-3 font-semibold text-slate-200">Officer</th>
               <th className="px-4 py-3 font-semibold text-slate-200">Updated</th>
+              <th className="px-4 py-3 font-semibold text-slate-200">Action</th>
             </tr>
           </thead>
           <tbody>
             {cases.map((caseItem) => (
-              <CaseListRow key={caseItem.id} case={caseItem} onSelect={onSelectCase} />
+              <CaseListRow
+                key={caseItem.id}
+                case={caseItem}
+                isSelected={caseItem.id === selectedCaseId}
+                onSelect={onSelectCase}
+              />
             ))}
           </tbody>
         </table>
       </div>
       <div className="px-4 py-3 bg-slate-700 border-t border-slate-600 text-xs text-slate-400">
-        Showing {cases.length} case{cases.length !== 1 ? 's' : ''}
+        Showing {cases.length} of {totalCases} case{totalCases !== 1 ? 's' : ''}
       </div>
     </div>
   )

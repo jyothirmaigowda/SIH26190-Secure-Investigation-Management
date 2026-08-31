@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { createV1Router } from './v1/index.js'
+import { registerRoutes } from './register.js'
 
 /**
  * Root API router for SIMS.
@@ -16,8 +17,9 @@ import { createV1Router } from './v1/index.js'
 export function createApiRouter(): Router {
   const router = Router()
 
-  // API v1 routes
-  router.use('/v1', createV1Router())
+  registerRoutes(router, (apiRouter) => {
+    apiRouter.use('/v1', createV1Router())
+  })
 
   // TODO: Future versions
   // router.use('/v2', createV2Router())

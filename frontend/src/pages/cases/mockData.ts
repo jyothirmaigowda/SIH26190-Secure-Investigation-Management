@@ -1,16 +1,20 @@
 /**
  * SIMS Case Management Mock Data
  *
+ * FRONTEND DEMO ONLY.
  * This is FICTIONAL demonstration data for frontend UI development.
  * All case numbers, officer names, police stations, and case details are fictional.
  * This data must NOT be used or considered as a template for real investigation records.
+ * It is not a final API response shape or database seed.
  *
  * FUTURE API INTEGRATION:
  * Replace this mock data with calls to:
  *   GET /api/cases
  *   GET /api/cases/:id
  *
- * API contract must be finalized with Member 4 before implementation.
+ * API contract, pagination, sorting, filtering, validation error shape,
+ * police station representation, officer/team relationships, and authorization
+ * rules must be finalized with Member 4/team before implementation.
  */
 
 import type { Case, CaseTeamMember } from './types/case'

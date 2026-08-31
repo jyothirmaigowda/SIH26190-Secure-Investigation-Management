@@ -20,7 +20,7 @@ import { CaseDetail } from './components/CaseDetail'
 import { CaseForm } from './components/CaseForm'
 
 export function CaseManagementPage(): JSX.Element {
-  // Local mock cases state for create/edit operations
+  // Frontend demo-only data source. Replace with the Member 4 API contract when finalized.
   const [cases, setCases] = useState<Case[]>(initialMockCases)
 
   const [selectedCaseId, setSelectedCaseId] = useState<string | null>(null)
@@ -46,7 +46,8 @@ export function CaseManagementPage(): JSX.Element {
     return Array.from(stations).sort()
   }, [cases])
 
-  // Filter cases based on current filters
+  // Frontend filtering is for presentation only.
+  // Authorization and case visibility must be enforced by the backend.
   const filteredCases = useMemo(() => {
     return cases.filter((caseItem) => {
       // Search query filtering
